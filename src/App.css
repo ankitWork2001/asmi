@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital@1&family=Nunito:wght@500;600;700&family=Poppins:wght@500&display=swap');
+body{
+  font-family: "Poppins", serif;
+}
+.bike::-webkit-scrollbar {
+    display: none;
+  }
+
+  
