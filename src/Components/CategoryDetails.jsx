@@ -23,11 +23,15 @@ const CategoryDetails = () => {
   const filteredData = selectedTag === "All" ? category.data : [selectedTag];
 
   return (
-    <div className="p-8">
-      {/* First Row: Sort By Tags + First 5 Categories */}
-      <div className="flex flex-wrap items-center gap-4 mb-3">
-        {/* Sort By Tags */}
-        <h2 className="font-semibold text-lg ml-33">Sort By Tags</h2>
+    <div className="p-4 sm:p-8">
+      {/* Category Title */}
+      <h1 className="text-3xl font-bold text-center mb-6 capitalize">
+        {category.name} Offers
+      </h1>
+
+      {/* Sort By Tags */}
+      <div className="flex flex-wrap items-center gap-4 mb-4 justify-center">
+        <h2 className="font-semibold text-lg">Sort By Tags</h2>
         <button
           onClick={() => setSelectedTag("All")}
           className={`px-4 py-2 rounded-full font-semibold transition ${
@@ -38,7 +42,6 @@ const CategoryDetails = () => {
         >
           All
         </button>
-
         {category.data.slice(0, 5).map((item, index) => (
           <button
             key={index}
@@ -54,8 +57,8 @@ const CategoryDetails = () => {
         ))}
       </div>
 
-      {/* Second Row: Remaining Categories */}
-      <div className="flex flex-wrap items-center gap-4 mb-15 ml-60">
+      {/* Remaining Categories */}
+      <div className="flex flex-wrap items-center gap-4 mb-6 justify-center">
         {category.data.slice(5).map((item, index) => (
           <button
             key={index}
@@ -71,14 +74,14 @@ const CategoryDetails = () => {
         ))}
       </div>
 
-      {/* Selected Data Display (One Per Row) */}
+      {/* Selected Data Display */}
       <div className="space-y-8">
         {filteredData.map((item, index) => (
           <div
             key={index}
-            className="p-6 border rounded-lg shadow-md bg-white hover:shadow-lg transition flex flex-col"
+            className="p-6 border rounded-lg shadow-md bg-white hover:shadow-lg transition flex flex-col text-center"
           >
-            <h3 className="text-xl font-semibold flex items-center gap-2">
+            <h3 className="text-xl font-semibold flex items-center gap-2 justify-center">
               <span>🌟</span> {item}
             </h3>
             <p className="text-gray-600">
@@ -90,9 +93,6 @@ const CategoryDetails = () => {
           </div>
         ))}
       </div>
-
-      {/* Space Below */}
-      <div className="h-16"></div>
 
       {/* Back Button */}
       <div className="flex justify-center mt-8">
