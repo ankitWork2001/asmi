@@ -23,9 +23,11 @@ const Collection = () => {
   return (
     <div className="p-4">
       <div className="my-10">
-      <h2 className="text-2xl font-bold mb-4">Valentine&apos;s Day Special</h2>
-      <img src={valen} alt="img"></img>
-      </div>  
+        <h2 className="text-2xl font-bold mb-4">
+          Valentine&apos;s Day Special
+        </h2>
+        <img src={valen} alt="img"></img>
+      </div>
       <h2 className="text-2xl font-bold mb-4">Cupid&apos;s Collection</h2>
       <div className="relative flex items-center">
         <button
@@ -39,11 +41,10 @@ const Collection = () => {
           ref={containerRef}
           className="flex space-x-4 overflow-x-auto scrollbar-hide snap-x snap-mandatory bike"
         >
-          {filteredProducts.map((product) => (
+          {filteredProducts.map((product, index) => (
             <div
-              key={product.id}
+              key={product.id || index}
               className="min-w-[250px] bg-white shadow-md rounded-md flex-shrink-0 cursor-pointer snap-center"
-             
             >
               <img
                 src={product.img}
@@ -52,15 +53,9 @@ const Collection = () => {
               />
               <div className="bg-gray-100 p-2">
                 <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
-                <p className="text-teal-500 font-medium">
-                  {product.discount} 
-                </p>
-                <p className="font-medium">
-                  {product.price} 
-                </p>
-                <p className="text-xs">
-                  {product.tag} 
-                </p>
+                <p className="text-teal-500 font-medium">{product.discount}</p>
+                <p className="font-medium">{product.price}</p>
+                <p className="text-xs">{product.tag}</p>
               </div>
             </div>
           ))}

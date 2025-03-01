@@ -1,4 +1,4 @@
-import React from "react";
+
 
 const brands = [
   { name: "Amazon", logo: "", reward: "Upto 6.5% Voucher Rewards" },
@@ -49,3 +49,5 @@ const Brand = () => {
 };
 
 export default Brand;
+
+

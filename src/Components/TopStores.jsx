@@ -1,5 +1,12 @@
+import { useNavigate } from "react-router-dom";
+
 const stores = [
-  { name: "Amazon", img: "amazon.png", offer: "Upto 6.5% Voucher Rewards", featured: true },
+  {
+    name: "Amazon",
+    img: "amazon.png",
+    offer: "Upto 6.5% Voucher Rewards",
+    featured: true,
+  },
   { name: "Flipkart", img: "flipkart.png", offer: "Upto 7%" },
   { name: "Myntra", img: "myntra.png", offer: "Upto 6.7%" },
   { name: "AJIO", img: "ajio.png", offer: "Upto 10.1%" },
@@ -12,6 +19,13 @@ const stores = [
 ];
 
 const TopStores = () => {
+  const navigate = useNavigate();
+
+  const handleStoreClick = (storeName) => {
+    const categoryId = 1;
+    navigate(`/category-details/${categoryId}/${storeName}`);
+  };
+
   return (
     <div className="p-6">
       <h2 className="text-2xl font-bold mb-4">Top Stores</h2>
@@ -20,17 +34,23 @@ const TopStores = () => {
           {stores.map((store, index) => (
             <div
               key={index}
-              className={`p-4 bg-white rounded-lg shadow-md flex flex-col items-center ${
-                store.featured ? "md:col-span-2 row-span-2 p-6 border-2 border-gray-300" : ""
+              className={`p-4 bg-white rounded-lg shadow-md flex flex-col items-center transition-transform duration-300 hover:scale-105 hover:shadow-lg cursor-pointer ${
+                store.featured
+                  ? "md:col-span-2 row-span-2 p-6 border-2 border-gray-300"
+                  : ""
               }`}
+              onClick={() => handleStoreClick(store.name)}
             >
               <p className="font-semibold">{store.name}</p>
               {store.offer && (
-                <span className="text-green-600 text-sm font-medium">{store.offer}</span>
+                <span className="text-green-600 text-sm font-medium">
+                  {store.offer}
+                </span>
               )}
             </div>
           ))}
-          <div className="p-4 bg-white rounded-lg shadow-md flex justify-center items-center">
+
+          <div className="p-4 bg-white rounded-lg shadow-md flex justify-center items-center hover:bg-gray-100 transition duration-300">
             <span className="text-blue-600 font-semibold">View All</span>
           </div>
         </div>

@@ -9,6 +9,7 @@ import Register from './Components/Register'
 import Category from './Components/Category'
 import Categories from "./Components/Categories";
 import CategoryDetails from "./Components/CategoryDetails";
+import TopStores from './Components/TopStores'
 
 function App() {
 
@@ -22,6 +23,11 @@ function App() {
         <Route path="/register" element={<Register />}></Route>
         <Route path="/" element={<Categories />} />
         <Route path="/category/:id" element={<CategoryDetails />} />
+        <Route path="/" element={<TopStores />} />
+        <Route
+          path="/category-details/:id/:brand?"
+          element={<CategoryDetails />}
+        />
       </Routes>
       <Footer />
       <Footbanner />

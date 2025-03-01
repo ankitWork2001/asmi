@@ -7,9 +7,8 @@ import categories from "../assets/categoryData/CategoriesData.js";
 
 const Categories = () => {
   const categoryRefs = useRef({});
-  const location = useLocation(); // Detects route changes
+  const location = useLocation(); 
 
-  // Scroll to top when the route changes
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [location.pathname]);
@@ -109,7 +108,7 @@ const Categories = () => {
 
             {/* Explore Now Button */}
             <Link
-              to={`/category/${category.id}`}
+              to={`/category/${category.id}?hideBrands=true`}
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
               className="bg-blue-500 mr-6 text-white rounded p-2 text-xs md:text-sm w-full sm:w-auto block text-center mt-6 sm:mt-0 sm:absolute sm:bottom-4 sm:right-4 hover:bg-blue-600 transition"
             >
