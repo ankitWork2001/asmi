@@ -13,35 +13,38 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="flex items-center justify-between p-4 bg-gray-700 shadow-md fixed w-full top-0 z-50">
-      <div className="flex items-center">
-        <Link to='/'>
-          <img src={logo} alt="Logo" className="h-10 w-auto" />
-        </Link>
-      </div>
+    <nav className="fixed w-full top-0 z-50 bg-[#131A22] shadow-md">
+      {/* Upper Navbar (Dark Background - Amazon Style) */}
+      <div className="flex items-center justify-between p-3">
+        <div className="flex items-center">
+          <Link to='/'>
+            <img src={logo} alt="Logo" className="h-10 w-auto" />
+          </Link>
+        </div>
 
-      <div className="relative hidden md:flex w-80">
-        <input
-          type="text"
-          placeholder='Search "Samsung M51"'
-          className="w-full px-4 py-2 text-gray-800 rounded-l-lg bg-white focus:outline-none"
-        />
-        <button className="px-4 bg-red-600 rounded-r-lg">
-          <FaSearch className="text-white" />
-        </button>
-      </div>
+        <div className="relative hidden md:flex w-80">
+          <input
+            type="text"
+            placeholder='Search "Samsung M51"'
+            className="w-full px-4 py-2 text-gray-800 rounded-l-lg bg-white focus:outline-none"
+          />
+          <button className="px-4 bg-[#FF9900] hover:bg-[#e68a00] rounded-r-lg">
+            <FaSearch className="text-white" />
+          </button>
+        </div>
 
-      <div className="hidden md:flex items-center space-x-4">
-        <Link to='/login'>
-          <FaUserCircle size={28} className="text-brown-400 cursor-pointer" />
-        </Link>
-      </div>
+        <div className="hidden md:flex items-center space-x-4">
+          <Link to='/login'>
+            <FaUserCircle size={28} className="text-[#007185] cursor-pointer" />
+          </Link>
+        </div>
 
-      {/* Mobile Menu Toggle */}
-      <div className="md:hidden flex items-center">
-        <button onClick={toggleMenu} className="text-2xl text-white">
-          {menuOpen ? <IoClose /> : <TiThMenu />}
-        </button>
+        {/* Mobile Menu Toggle */}
+        <div className="md:hidden flex items-center">
+          <button onClick={toggleMenu} className="text-2xl text-white">
+            {menuOpen ? <IoClose /> : <TiThMenu />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
@@ -56,13 +59,13 @@ const Navbar = () => {
             placeholder='Search "Samsung M51"'
             className="w-full px-4 py-2 text-gray-800 rounded-l-lg bg-gray-200 focus:outline-none"
           />
-          <button className="px-4 bg-red-600 rounded-r-lg">
+          <button className="px-4 bg-[#FF9900] hover:bg-[#e68a00] rounded-r-lg">
             <FaSearch className="text-white" />
           </button>
         </div>
 
         <Link to='/login'>
-          <FaUserCircle size={28} className="text-brown-400 cursor-pointer" />
+          <FaUserCircle size={28} className="text-[#007185] cursor-pointer" />
         </Link>
       </div>
     </nav>

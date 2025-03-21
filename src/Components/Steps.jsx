@@ -33,7 +33,7 @@ const Steps = () => {
         {steps.map((step) => (
           <div
             key={step.id}
-            className="relative bg-gray-50 p-6 rounded-lg shadow-lg flex flex-col items-center"
+            className="relative bg-gray-50 p-6 rounded-3xl shadow-lg flex flex-col items-center transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:border-[#FF9900] hover:bg-gradient-to-r hover:from-yellow-300 hover:to-yellow-500"
           >
             <span className="absolute -top-3 right-3 bg-purple-200 font-bold px-3 py-1 rounded">
               {step.id}
