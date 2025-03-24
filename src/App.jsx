@@ -12,6 +12,8 @@ import TopStores from "./Components/TopStores";
 import FilteredOffersPage from "./Components/FilteredOffersPage";
 import CategoryOffersPage from "./Components/CategoryOffersPage";
 import Offers from "./Components/Offers";
+import SpecificCategories from "./Components/SpecificCategories";
+
 
 function App() {
   return (
@@ -27,6 +29,10 @@ function App() {
         <Route path="/category-details/:id/:brand?" element={<CategoryDetails />} />
         <Route path="/filtered-offers/:categoryId" element={<FilteredOffersPage />} />
         <Route path="/category-offers/:categoryName" element={<CategoryOffersPage />} />
+        <Route path="/specific-category/:categoryName" element={<SpecificCategories />} />
+        <Route path="/categories/:categoryName" element={<SpecificCategories />} />
+
+
         <Route path="/offers" element={<Offers />} />
       </Routes>
       <Footer />

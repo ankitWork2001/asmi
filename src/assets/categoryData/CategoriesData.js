@@ -418,45 +418,75 @@ const categories = [
     api:"https://api.escuelajs.co/api/v1/categories",
     data: [
       {
-        name: "Refrigerators",
-        image: "https://e7.pngegg.com/pngimages/525/13/png-clipart-refrigerator-refrigerator-thumbnail.png", // Replace with actual image path
+        "name": "Refrigerators",
+        "image": "https://e7.pngegg.com/pngimages/525/13/png-clipart-refrigerator-refrigerator-thumbnail.png",
+        "type": "Cashback",
+        "description": "Energy-efficient and spacious refrigerators to keep your food fresh.",
+        "offers": 32
       },
       {
-        name: "Microwaves",
-        image: "https://e7.pngegg.com/pngimages/864/109/png-clipart-microwave-oven-induction-cooking-kitchen-stove-home-appliance-microwave-oven-kitchen-kitchen-appliance-thumbnail.png", // Replace with actual image path
+        "name": "Microwaves",
+        "image": "https://e7.pngegg.com/pngimages/864/109/png-clipart-microwave-oven-induction-cooking-kitchen-stove-home-appliance-microwave-oven-kitchen-kitchen-appliance-thumbnail.png",
+        "type": "Discount",
+        "description": "Versatile microwaves for quick and efficient cooking.",
+        "offers": 75
       },
       {
-        name: "Washing Machines",
-        image: "https://e7.pngegg.com/pngimages/8/183/png-clipart-washing-machine-washing-machine-thumbnail.png", // Replace with actual image path
+        "name": "Washing Machines",
+        "image": "https://e7.pngegg.com/pngimages/8/183/png-clipart-washing-machine-washing-machine-thumbnail.png",
+        "type": "Cashback",
+        "description": "Automatic washing machines for effortless laundry.",
+        "offers": 12
       },
       {
-        name: "Dishwashers",
-        image: "/path/to/dishwasher-image.jpg", // Replace with actual image path
+        "name": "Dishwashers",
+        "image": "https://media.istockphoto.com/id/1366538341/photo/open-dishwasher-with-clean-cutlery-glasses-dishes-inside-in-the-home-kitchen.jpg?s=612x612&w=0&k=20&c=v_ETouzHMWQBS5hGtBHTlYHNaESgkCETwAQOexnQRWs=",
+        "type": "Limited",
+        "description": "High-performance dishwashers for easy and quick cleaning.",
+        "offers": 48
       },
       {
-        name: "Ovens",
-        image: "/path/to/oven-image.jpg", // Replace with actual image path
+        "name": "Ovens",
+        "image": "https://media.istockphoto.com/id/1419329550/photo/unfortunate-cooking-in-an-oven.jpg?s=612x612&w=0&k=20&c=w_2_14mbuuIvTTRm9CcVLGCAvF2tfcJN2UGXOxaOHzE=",
+        "type": "Discount",
+        "description": "Premium ovens for baking, roasting, and grilling.",
+        "offers": 60
       },
       {
-        name: "Vacuum Cleaners",
-        image: "/path/to/vacuum-cleaner-image.jpg", // Replace with actual image path
+        "name": "Vacuum Cleaners",
+        "image": "https://media.istockphoto.com/id/1392969066/photo/young-woman-vacuuming-her-apartment.jpg?s=612x612&w=0&k=20&c=NfAXqDBIssmCNVYFv-1pevu3hfe57D2btEDSl8greLM=",
+        "type": "Limited",
+        "description": "Powerful vacuum cleaners for deep and effective cleaning.",
+        "offers": 22
       },
       {
-        name: "Air Conditioners",
-        image: "/path/to/air-conditioner-image.jpg", // Replace with actual image path
+        "name": "Air Conditioners",
+        "image": "https://media.istockphoto.com/id/1464462569/photo/happy-family-resting-under-air-conditioner-on-beige-wall-at-home.jpg?s=612x612&w=0&k=20&c=DDjRPWVmxJrJpahEbROcSAd08-hYBQ29ppl01vTKM5g=",
+        "type": "Cashback",
+        "description": "Cooling solutions for every season with energy efficiency.",
+        "offers": 89
       },
       {
-        name: "Heaters",
-        image: "/path/to/heater-image.jpg", // Replace with actual image path
+        "name": "Heaters",
+        "image": "https://media.istockphoto.com/id/1438984156/photo/woman-warming-her-hands-over-electric-heater-at-home.jpg?s=612x612&w=0&k=20&c=UUCsqX1MOHUUx11npFjJV6Z2-3b6Cp2TPcJOj3ZfT-U=",
+        "type": "Limited",
+        "description": "Stay warm with energy-efficient heaters for home and office.",
+        "offers": 41
       },
       {
-        name: "Coffee Makers",
-        image: "/path/to/coffee-maker-image.jpg", // Replace with actual image path
+        "name": "Coffee Makers",
+        "image": "https://media.istockphoto.com/id/1426212349/photo/woman-preparing-fresh-aromatic-coffee-with-modern-machine-in-office-closeup.jpg?s=612x612&w=0&k=20&c=hyFgkl4tLleejdA0qW4aZVM_tmjFMaeU794BZQ_m4Bg=",
+        "type": "Discount",
+        "description": "Brew the perfect cup of coffee with advanced coffee makers.",
+        "offers": 55
       },
       {
-        name: "Blenders",
-        image: "/path/to/blender-image.jpg", // Replace with actual image path
-      },
+        "name": "Blenders",
+        "image": "https://media.istockphoto.com/id/1313643282/photo/woman-is-preparing-a-healthy-detox-drink-in-a-blender-a-green-smoothie-with-fresh-fruits.jpg?s=612x612&w=0&k=20&c=uhBGHx8QFZVTfyC7a97G992g2Q0oDu725BoKiYKaHXM=",
+        "type": "Discount",
+        "description": "Versatile blenders for smoothies, soups, and more.",
+        "offers": 30
+      }
     ],
   }
   ,

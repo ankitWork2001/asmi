@@ -10,6 +10,8 @@ const Offers = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [sortBy, setSortBy] = useState("");
+  const [trendingOffers, setTrendingOffers] = useState([]);
+  const [currentTrendingIndex, setCurrentTrendingIndex] = useState(0);
   const [expandedOffer, setExpandedOffer] = useState(null);
 
   useEffect(() => {
@@ -18,16 +20,13 @@ const Offers = () => {
       try {
         const response = await fetch(api);
         const data = await response.json();
-        const randomOffers = data.sort(() => 0.5 - Math.random()).slice(0, 5);
-        setOffers(randomOffers);
+        setOffers(data.sort(() => 0.5 - Math.random()).slice(0, 6));
+        setFilteredOffers(data);
       } catch (error) {
         console.error("Error fetching offers:", error);
       }
     };
-
-    if (api) {
-      fetchOffers();
-    }
+    if (api) fetchOffers();
   }, [api]);
 
   useEffect(() => {
@@ -43,17 +42,34 @@ const Offers = () => {
     fetchCategories();
   }, []);
 
+  useEffect(() => {
+    const fetchTrendingOffers = async () => {
+      try {
+        const response = await fetch("https://api.escuelajs.co/api/v1/products");
+        const data = await response.json();
+        setTrendingOffers(data.slice(0, 5));
+      } catch (error) {
+        console.error("Error fetching trending offers:", error);
+      }
+    };
+    fetchTrendingOffers();
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTrendingIndex((prevIndex) => (prevIndex + 1) % trendingOffers.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [trendingOffers]);
+
   const fetchFilteredProducts = async () => {
     let url = "https://api.escuelajs.co/api/v1/products";
-    if (selectedCategory || maxPrice || sortBy) {
-      url += "?";
-      const params = [];
-      if (selectedCategory) params.push(`categoryId=${selectedCategory}`);
-      if (maxPrice) params.push(`price_lte=${maxPrice}`);
-      if (sortBy === "newest") params.push("_sort=creationAt&_order=desc");
-      if (sortBy === "oldest") params.push("_sort=creationAt&_order=asc");
-      url += params.join("&");
-    }
+    let params = [];
+    if (selectedCategory) params.push(`categoryId=${selectedCategory}`);
+    if (maxPrice) params.push(`price_lte=${maxPrice}`);
+    if (sortBy === "newest") params.push("_sort=creationAt&_order=desc");
+    if (sortBy === "oldest") params.push("_sort=creationAt&_order=asc");
+    if (params.length) url += "?" + params.join("&");
     try {
       const response = await fetch(url);
       const data = await response.json();
@@ -64,86 +80,38 @@ const Offers = () => {
   };
 
   return (
-    <div className="pt-24 p-8 bg-white min-h-screen flex gap-8">
-      {/* Filter Section */}
-      <div className="w-1/4 bg-gray-100 p-6 rounded-lg shadow-md border border-gray-300 h-fit sticky top-24">
-        <h3 className="text-lg font-semibold mb-4 text-gray-900 border-b pb-2">Filter By</h3>
-        <div>
-          <label className="font-medium">Category</label>
-          <select
-            className="w-full p-2 border rounded mt-2 bg-white"
-            onChange={(e) => setSelectedCategory(e.target.value)}
-          >
-            <option value="">All Categories</option>
-            {categories.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.name}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="mt-4">
-          <label className="font-medium">Max Price</label>
-          <input
-            type="number"
-            className="w-full p-2 border rounded mt-2 bg-white"
-            placeholder="Enter max price"
-            onChange={(e) => setMaxPrice(e.target.value)}
-          />
-        </div>
-        <div className="mt-4">
-          <label className="font-medium">Sort By</label>
-          <select
-            className="w-full p-2 border rounded mt-2 bg-white"
-            onChange={(e) => setSortBy(e.target.value)}
-          >
-            <option value="">None</option>
-            <option value="newest">Newest First</option>
-            <option value="oldest">Oldest First</option>
-          </select>
-        </div>
-        <button
-          className="mt-4 w-full bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 transition-all"
-          onClick={fetchFilteredProducts}
-        >
-          Apply Filters
-        </button>
+    <div className="pt-24 p-8 bg-gradient-to-br from-gray-100 to-blue-50 min-h-screen flex gap-8">
+      <div className="w-1/4 bg-white p-6 rounded-2xl shadow-xl border border-gray-300 h-fit sticky top-24 flex flex-col gap-6">
+        <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Filter Offers</h3>
+        <label className="font-medium block mt-3">Category</label>
+        <select className="w-full p-3 border rounded-lg bg-gray-50" onChange={(e) => setSelectedCategory(e.target.value)}>
+          <option value="">All Categories</option>
+          {categories.map((cat) => (
+            <option key={cat.id} value={cat.id}>{cat.name}</option>
+          ))}
+        </select>
+        <label className="font-medium block mt-3">Max Price</label>
+        <input type="number" className="w-full p-3 border rounded-lg bg-gray-50" placeholder="$" onChange={(e) => setMaxPrice(e.target.value)} />
+        <button className="mt-4 w-full bg-blue-600 text-white p-3 rounded-xl hover:bg-blue-700 transition-all" onClick={fetchFilteredProducts}>Apply Filters</button>
       </div>
 
-      {/* Offers Section */}
       <div className="w-3/4">
         <h2 className="text-3xl font-bold text-gray-900 text-center mb-6">{storeName} Offers</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {(filteredOffers.length > 0 ? filteredOffers : offers).map((offer) => (
-            <div
-              key={offer.id}
-              className="bg-white p-4 rounded-lg shadow-md border border-gray-200 hover:shadow-xl hover:scale-105 transition-transform duration-300 ease-in-out transform"
-            >
-              <img
-                src={offer.images?.[0] || offer.image}
-                alt={offer.title}
-                className="w-full h-48 object-cover rounded-md mb-3"
-              />
-              <h3 className="text-md font-semibold text-gray-900">{offer.title}</h3>
-              <p className="text-gray-700 text-sm mt-1">${offer.price}</p>
-              {offer.description.length > 80 ? (
-                <>
-                  <p className="text-sm text-gray-600 mt-2">
-                    {expandedOffer === offer.id ? offer.description : `${offer.description.slice(0, 80)}...`}
-                  </p>
-                  <button
-                    className="text-blue-600 font-medium mt-1 hover:underline"
-                    onClick={() => setExpandedOffer(expandedOffer === offer.id ? null : offer.id)}
-                  >
-                    {expandedOffer === offer.id ? "Show Less" : "Read More"}
+          {filteredOffers.map((offer) => (
+            <div key={offer.id} className="bg-white p-6 rounded-2xl shadow-lg border border-gray-200 hover:shadow-2xl hover:scale-105 transition-all flex flex-col h-full">
+              <img src={offer.images?.[0]} alt={offer.title} className="w-full h-40 object-cover rounded-lg mb-3" />
+              <h3 className="text-lg font-semibold text-gray-900 flex-grow">{offer.title}</h3>
+              <p className="text-gray-700 mt-1 font-medium">Price: ${offer.price}</p>
+              <p className="text-sm text-gray-600 mt-2 flex-grow">
+                {expandedOffer === offer.id ? offer.description : offer.description?.slice(0, 80)}
+                {offer.description?.length > 80 && (
+                  <button className="text-blue-500 ml-2" onClick={() => setExpandedOffer(expandedOffer === offer.id ? null : offer.id)}>
+                    {expandedOffer === offer.id ? "Read Less" : "Read More"}
                   </button>
-                </>
-              ) : (
-                <p className="text-sm text-gray-600 mt-2">{offer.description}</p>
-              )}
-              <button className="mt-3 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-all">
-                Grab Deal
-              </button>
+                )}
+              </p>
+              <button className="mt-auto w-full px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-xl hover:bg-blue-700 transition-all">View Offer</button>
             </div>
           ))}
         </div>

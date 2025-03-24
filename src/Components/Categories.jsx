@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import axios from "axios";
 import categories from "../assets/categoryData/CategoriesData.js";
-import categoryAPIs from "../assets/categoryData/categoryAPIs";
+import categoriesSpecial from "../assets/categoryData/categoryAPIs"; // Corrected import
 
 const Categories = ({ selectedStore }) => {
   const categoryRefs = useRef({});
@@ -28,7 +28,7 @@ const Categories = ({ selectedStore }) => {
   }, [selectedStore]);
 
   const fetchCategoryData = async (categoryName) => {
-    const api = categoryAPIs[categoryName] || categoryAPIs.default;
+    const api = categoriesSpecial[categoryName] || categoriesSpecial.default;
     try {
       const response = await axios.get(api);
       setCategoryData((prevData) => ({ ...prevData, [categoryName]: response.data.slice(0, 10) }));
@@ -38,10 +38,9 @@ const Categories = ({ selectedStore }) => {
   };
 
   const handleCategoryClick = (categoryName) => {
-    fetchCategoryData(categoryName);
-    navigate(`/category-offers/${encodeURIComponent(categoryName)}`);
+    navigate(`/specific-category/${encodeURIComponent(categoryName)}`);
   };
-
+  
   const settings = {
     dots: false,
     infinite: true,
@@ -132,8 +131,7 @@ const Categories = ({ selectedStore }) => {
 
             {/* Explore Now Button */}
             <Link
-              to={`/category-offers/${encodeURIComponent(category.name)}?hideBrands=true`}
-              state={{ categoryData: categoryData[category.name] || [] }}
+              to={`/category-offers/${category.id}`} // Navigate to CategoryOffers page
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
               className="bg-[#B68A3D] text-white rounded-lg p-3 text-sm w-full sm:w-auto block text-center mt-6 sm:mt-0 sm:absolute sm:bottom-4 sm:right-4 hover:bg-[#D4AF37] transition"
             >
